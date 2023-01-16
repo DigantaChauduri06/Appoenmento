@@ -1,10 +1,18 @@
+import 'antd/dist/reset.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
+// Page Import
+import Login from './Pages/Login';
+import Register from './Pages/Register';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Appointmento</h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

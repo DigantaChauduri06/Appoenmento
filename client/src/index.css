@@ -1,0 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,800;0,900;1,700&display=swap");
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+:root {
+  --button-primary-color: #0047ab;
+}
+
+/* antd Override */
+input {
+  border-radius: 0 !important;
+  border: 1px solid rgba(128, 128, 128, 0.421) !important;
+  height: 40px !important;
+}
+input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border: 1px solid black !important;
+}
+label {
+  font-size: 16px !important;
+  color: black !important;
+}
+.ant-form-item {
+  margin: 10px 0 !important;
+  padding: 0 5px !important;
+}
+/* Common Styling */
+.card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.normal-text {
+  font-size: 1rem;
+}
+.card {
+  box-shadow: 0 0 2px gray;
+  border-radius: 0 !important;
+}
+.primary-button {
+  background-color: var(--button-primary-color) !important;
+  border-color: var(--button-primary-color) !important;
+  color: #fff !important;
+  height: 40px;
+  width: 100%;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+.anchor {
+  color: black !important;
+  text-decoration: underline;
+  font-size: 1rem !important;
+  margin-top: 10px !important;
+  display: inline-block !important;
+}
+.anchor:hover {
+  text-decoration: underline !important;
+}
+.authentication-form .card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: orangered;
+  color: #fff !important;
+  max-width: max-content !important;
+  padding: 7px 15px;
+  margin-left: -40px;
+  border-bottom-left-radius: 10px;
+}
+/* AUTH Pages */
+.authentication {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #7f00ff;
+}
+.authentication-form {
+  width: 400px;
+}

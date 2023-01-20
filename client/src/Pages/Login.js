@@ -3,14 +3,13 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { hideLoading, showLoading } from '../Redux/alertsSlice';
+import { hideLoading, showLoading } from '../Redux/slice/alertsSlice';
 
 function Login() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const onFinished = async (values) => {
         dispatch(showLoading())
-        console.log(values)
         try {
             values.email = values.email?.toLowerCase()
             const res = await axios.post("/api/user/login", values)
@@ -37,10 +36,10 @@ function Login() {
             <div className="authentication-form card p-2">
                 <h1 className="card-title">Welcome Back!</h1>
                 <Form layout='vertical' onFinish={onFinished}>
-                    <Form.Item label='Email' name='email'>
+                    <Form.Item required label='Email' name='email'>
                         <Input placeholder='Email' type="email" required />
                     </Form.Item>
-                    <Form.Item label='Password' name='password'>
+                    <Form.Item required label='Password' name='password'>
                         <Input placeholder='Password' type="password" required />
                     </Form.Item>
                     <Button className='primary-button' htmlType='submit'>Login</Button>

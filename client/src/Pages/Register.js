@@ -2,7 +2,7 @@ import { Button, Form, Input } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import axios from 'axios'
-import { hideLoading, showLoading } from '../Redux/alertsSlice'
+import { hideLoading, showLoading } from '../Redux/slice/alertsSlice'
 import { useDispatch } from 'react-redux';
 
 function Register() {
@@ -10,7 +10,6 @@ function Register() {
 
     const navigate = useNavigate()
     const onFinished = async (values) => {
-        console.log(values)
         try {
             dispatch(showLoading())
             values.email = values.email?.toLowerCase()
@@ -38,13 +37,13 @@ function Register() {
             <div className="authentication-form card p-2">
                 <h1 className="card-title">Nice To Meet U!</h1>
                 <Form layout='vertical' onFinish={onFinished}>
-                    <Form.Item label='Name' name='name'>
+                    <Form.Item required label='Name' name='name'>
                         <Input placeholder='Name' required />
                     </Form.Item>
-                    <Form.Item label='Email' name='email'>
+                    <Form.Item required label='Email' name='email'>
                         <Input placeholder='Email' type="email" required />
                     </Form.Item>
-                    <Form.Item label='Password' name='password'>
+                    <Form.Item required label='Password' name='password'>
                         <Input placeholder='Password' type="password" required />
                     </Form.Item>
                     <Button className='primary-button' htmlType='submit'>Register</Button>

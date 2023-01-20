@@ -9,12 +9,20 @@
 }
 
 /* antd Override */
-input {
+.ant-picker-input input {
+  border: none !important;
+}
+.ant-picker {
+  height: 40px !important;
+}
+input,
+.ant-picker {
   border-radius: 0 !important;
   border: 1px solid rgba(128, 128, 128, 0.421) !important;
   height: 40px !important;
 }
-input:focus {
+input:focus,
+.ant-picker {
   outline: none !important;
   box-shadow: none !important;
   border: 1px solid black !important;
@@ -30,7 +38,8 @@ label {
 /* Common Styling */
 .card-title {
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.735);
 }
 .normal-text {
   font-size: 1rem;

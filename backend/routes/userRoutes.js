@@ -2,7 +2,10 @@ const express = require('express');
 const {
     register,
     login,
-    userInfo
+    userInfo,
+    applyDoctor,
+    markSeen,
+    deleteAllNotification
 } = require('../Controllers/userController');
 const authMiddleware = require('../middlewares/authMiddlewares')
 
@@ -14,5 +17,8 @@ router.get("/", (req, res) => res.send({ message: "Hello There" }))
 router.post('/register', register)
 router.post('/login', login)
 router.post('/get-user-info-by-id', authMiddleware, userInfo)
+router.post('/apply-doctor', authMiddleware, applyDoctor)
+router.post('/mark-all-notification-seen', authMiddleware, markSeen)
+router.post('/delete-all-notification-seen', authMiddleware, deleteAllNotification)
 
 module.exports = router

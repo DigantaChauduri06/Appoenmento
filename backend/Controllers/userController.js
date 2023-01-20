@@ -1,4 +1,5 @@
 const User = require('../models/userModel')
+const Doctor = require('../models/doctorModel')
 
 
 const bcrypt = require('bcrypt');
@@ -28,7 +29,6 @@ exports.register = async (req, res) => {
         res.status(201).send({ success: true, message: "User Created Successfully" })
 
     } catch (err) {
-        console.log(err)
         res.status(500).send({ success: false, message: "Error creating user" })
     }
 }
@@ -69,13 +69,67 @@ exports.userInfo = async (req, res) => {
         if (!user) {
             return res.status(status.UNAUTHORIZED).send({ success: false, message: 'User doesnot exist' })
         }
+        user.password = null;
         res.status(status.OK).send({
-            success: true, data: {
-                name: user.name,
-                email: user.email
-            }
+            success: true, data: user
         })
     } catch (e) {
         res.status(500).send({ message: 'Error getting user info', success: false })
+    }
+}
+exports.applyDoctor = async (req, res) => {
+    try {
+        const newDoctor = new Doctor({ ...req.body, status: "pending" })
+        await newDoctor.save()
+        const adminUser = await User.findOne({ isAdmin: true })
+        const unseenNotification = adminUser.unseenNotification
+        unseenNotification.push({
+            type: "new-doctor-req",
+            message: `${newDoctor.firstName} has applied for doctor account`,
+            data: {
+                doctorId: newDoctor._id,
+                name: newDoctor.firstName + ' ' + newDoctor.lastName
+            },
+            onClickPath: "/admin/doctors"
+        })
+        await User.findByIdAndUpdate(adminUser._id, { unseenNotification })
+        res.status(200).send({ success: true, message: "Doctor account applied successfully!" })
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({ success: false, message: "Error creating doctor account" })
+    }
+}
+exports.markSeen = async (req, res) => {
+    try {
+        const user = await User.findOne({ _id: req.body.userId });
+        const unseenNotification = [...user.unseenNotification]
+        const seenNotification = user.seenNotification;
+        seenNotification.push(...unseenNotification)
+        user.seenNotification = seenNotification
+        user.unseenNotification = [];
+        const updatedUser = await user.save()
+        updatedUser.password = null
+        res.status(200).send({ message: "All notifications are marked as seen", success: true, data: updatedUser })
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({ success: false, message: "Error getting the notifications" })
+    }
+}
+exports.deleteAllNotification = async (req, res) => {
+    try {
+        const user = await User.findOne({ _id: req.body.userId });
+        const unseenNotification = [...user.unseenNotification]
+        // user.seenNotification = unseenNotification
+        user.unseenNotification = [];
+        user.seenNotification = [];
+        const updatedUser = await user.save();
+        updatedUser.password = null
+        res.status(201).send({ message: "All notifications are deleted", success: true, data: updatedUser })
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({ success: false, message: "Error deleting the notifications" })
     }
 }

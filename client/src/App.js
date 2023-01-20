@@ -10,10 +10,11 @@ import Home from './Pages/Home';
 import { useSelector } from 'react-redux';
 import ProtectedRoutes from './Components/ProtectedRoutes';
 import PublicRoute from './Components/PublicRoute';
+import ApplyDoctor from './Pages/ApplyDoctor';
+import Notification from './Pages/Notification';
 
 function App() {
   const { loading } = useSelector(state => state.alerts)
-  console.log(loading);
   return (
     <BrowserRouter>
       {
@@ -32,6 +33,8 @@ function App() {
         <Route path='/login' element={<PublicRoute><Login /></PublicRoute>} />
         <Route path='/register' element={<PublicRoute><Register /></PublicRoute>} />
         <Route path='/' element={<ProtectedRoutes><Home /></ProtectedRoutes>} />
+        <Route path='/apply-doctor' element={<ProtectedRoutes><ApplyDoctor /></ProtectedRoutes>} />
+        <Route path='/notifications' element={<ProtectedRoutes><Notification /></ProtectedRoutes>} />
       </Routes>
     </BrowserRouter>
   );

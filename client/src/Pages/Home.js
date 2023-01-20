@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import axios from 'axios'
+import Layout from '../Components/Layout'
 
 function Home() {
     useEffect(() => {
@@ -11,8 +12,6 @@ function Home() {
                         Authorization: 'Bearer ' + localStorage.getItem('token')
                     }
                 })
-
-                console.log(res.data);
             } catch (err) {
 
             }
@@ -21,7 +20,9 @@ function Home() {
     }, [])
 
     return (
-        <div>Home</div>
+        <Layout>
+            <h1>HomePage</h1>
+        </Layout>
     )
 }
 export default Home

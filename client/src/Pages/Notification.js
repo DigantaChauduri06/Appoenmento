@@ -73,7 +73,7 @@ function Notification() {
                     </div>
                     {
                         user?.unseenNotification.map(noti => (
-                            <div className='card p-2 m-2 mb-3' style={{ cursor: "pointer" }} key={noti.data.doctorId} onClick={() => navigate(noti.onClickPath)}>
+                            <div className='card p-2 m-2 mb-3' style={{ cursor: "pointer" }} key={noti.data?.doctorId} onClick={() => navigate(noti.onClickPath)}>
                                 <div className="card-text">{noti.message}</div>
                             </div>
                         )
@@ -88,8 +88,8 @@ function Notification() {
                     </div>
                     {
                         user?.seenNotification.map(noti => (
-                            <div className='card p-2 m-2 mb-3' style={{ cursor: "pointer" }} key={noti.data.doctorId} onClick={() => navigate(noti.onClickPath)}>
-                                <div className="card-text">{noti.message}</div>
+                            <div className='card p-2 m-2 mb-3' style={{ cursor: "pointer" }} key={noti.data?.doctorId} onClick={() => navigate(noti?.onClickPath)}>
+                                <div className="card-text">{noti?.message}</div>
                             </div>
                         )
 

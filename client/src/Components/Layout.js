@@ -10,7 +10,7 @@ function Layout({ children }) {
     const location = useLocation()
     const { user } = useSelector(state => state.user)
     const navigate = useNavigate()
-    const userMenu = [
+    const UserMenu = [
         {
             name: 'Home',
             path: '/',
@@ -32,6 +32,23 @@ function Layout({ children }) {
             icon: 'ri-user-3-line'
         },
     ];
+    const DoctorMenu = [
+        {
+            name: 'Home',
+            path: '/',
+            icon: 'ri-home-4-line'
+        },
+        {
+            name: 'Appointments',
+            path: '/appointments',
+            icon: 'ri-file-list-3-line'
+        },
+        {
+            name: 'Profile',
+            path: `/doctor/profile/${user?._id}`,
+            icon: 'ri-user-3-line'
+        },
+    ];
     const AdminMenu = [
         {
             name: 'Home',
@@ -41,13 +58,13 @@ function Layout({ children }) {
 
         {
             name: 'Users',
-            path: '/users',
+            path: '/admin/users',
             icon: 'ri-user-4-line'
         },
 
         {
             name: 'Doctors',
-            path: '/doctors',
+            path: '/admin/doctors',
             icon: 'ri-hospital-line'
         },
 
@@ -58,15 +75,6 @@ function Layout({ children }) {
         },
     ];
 
-    /*
-            {
-                name: 'Logout',
-                path: '/logout',
-                icon: 'ri-logout-box-r-line'
-            },
-    
-    */
-    // const isActive = location.pathname === 'logout'
     const MenuToBeRender = ({ menu }) => {
         const isActive = location.pathname === menu.path
 
@@ -89,7 +97,13 @@ function Layout({ children }) {
                     <div className='menu'>
                         {/*! change the user?.isAdmin to !user?.isAdmin*/}
                         {
-                            !user?.isAdmin ? userMenu.map(menu => <MenuToBeRender key={menu.name} menu={menu} />) : AdminMenu.map(menu => <MenuToBeRender key={menu.name} menu={menu} />)
+                            user?.isAdmin && AdminMenu.map(menu => <MenuToBeRender key={menu.name} menu={menu} />)
+                        }
+                        {
+                            user?.isDoctor && DoctorMenu.map(menu => <MenuToBeRender key={menu.name} menu={menu} />)
+                        }
+                        {
+                            !user?.isAdmin && !user?.isDoctor && UserMenu.map(menu => <MenuToBeRender key={menu.name} menu={menu} />)
                         }
                         <div className={`d-flex menu-item`} onClick={() => {
                             localStorage.clear()

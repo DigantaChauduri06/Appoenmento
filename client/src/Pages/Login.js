@@ -16,7 +16,7 @@ function Login() {
             dispatch(hideLoading())
             if (res.data.success) {
                 toast.success(res.data.message)
-                toast.success("Redirected to Home Page")
+                // toast.success("Redirected to Home Page")
                 localStorage.setItem("token", res.data.data)
                 navigate("/")
             } else {

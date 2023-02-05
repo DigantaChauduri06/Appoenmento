@@ -6,7 +6,17 @@ import { hideLoading, showLoading } from "../Redux/slice/alertsSlice";
 import { useNavigate } from 'react-router-dom';
 import toast from "react-hot-toast";
 import DoctorForm from '../Components/DoctorForm';
-import moment from 'moment'
+import dayjs from "dayjs";
+
+export function getTimeing(time) {
+    time = time.toString()
+    console.log(time);
+    const timeArr = time.split(":");
+    let str = ""
+    str += timeArr[0][timeArr[0].length - 2] + timeArr[0][timeArr[0].length - 1] + ":"
+    str += timeArr[1]
+    return str
+}
 
 function ApplyDoctor() {
     const navigate = useNavigate()
@@ -19,8 +29,8 @@ function ApplyDoctor() {
             const res = await axios.post("/api/user/apply-doctor", {
                 ...values, userId: user._id,
                 timeings: [
-                    moment(values.timeings[0]).format("HH:mm"),
-                    moment(values.timeings[1]).format("HH:mm"),
+                    getTimeing(values.timeings[0].$d),
+                    getTimeing(values.timeings[1].$d),
                 ]
             }, {
                 headers: {

@@ -88,7 +88,6 @@ function Layout({ children }) {
 
     return (
         <div className='main'>
-
             <div className='d-flex layout'>
                 <div className={`${collapsed ? 'collapsed-sidebar' : 'sidebar'} `}>
                     <div className="sidebar-header">

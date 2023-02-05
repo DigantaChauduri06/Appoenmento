@@ -6,9 +6,7 @@ import { hideLoading, showLoading } from '../../Redux/slice/alertsSlice';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useEffect, useState } from 'react';
-import moment from 'moment'
 import { getTimeing } from '../ApplyDoctor';
-import dayjs from 'dayjs';
 
 function Profile() {
     const [doctor, setDoctor] = useState(null)

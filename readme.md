@@ -42,7 +42,7 @@ This is a full-stack website built using the MERN stack (MongoDB, Express.js, Re
 * Create a MongoDB Atlas account and set up a cluster, and connect it to the app.
 * Run `npm start` to start the development server.
 
-** Note **
+**Note**
 Make sure you have MongoDB Atlas account and connect it to the app before starting the development server.
 
 **Technologies used**

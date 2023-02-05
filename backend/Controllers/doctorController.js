@@ -27,3 +27,17 @@ exports.updateDoctorInfo = async (req, res) => {
         res.status(500).send({ message: 'Error updating doctor info', success: false })
     }
 }
+
+
+exports.getDoctorInfoById = async (req, res) => {
+    console.log(req.body.userId);
+    try {
+        const doctor = await Doctor.findOne({ _id: req.body.doctorId })
+        // user.password = null;
+        res.status(200).send({
+            success: true, data: doctor, message: "Doctor fetched successfully"
+        })
+    } catch (e) {
+        res.status(500).send({ message: 'Error getting doctor info', success: false })
+    }
+}

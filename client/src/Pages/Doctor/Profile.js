@@ -7,6 +7,8 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useEffect, useState } from 'react';
 import moment from 'moment'
+import { getTimeing } from '../ApplyDoctor';
+import dayjs from 'dayjs';
 
 function Profile() {
     const [doctor, setDoctor] = useState(null)
@@ -49,8 +51,8 @@ function Profile() {
             const res = await axios.post("/api/doctor/update-doctor-info-by-id", {
                 ...values, userId: user._id,
                 timeings: [
-                    moment(values.timeings[0]).format("HH:mm"),
-                    moment(values.timeings[1]).format("HH:mm"),
+                    getTimeing(values.timeings[0]),
+                    getTimeing(values.timeings[1]),
                 ]
             }, {
                 headers: {

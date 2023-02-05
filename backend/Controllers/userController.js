@@ -133,3 +133,14 @@ exports.deleteAllNotification = async (req, res) => {
         res.status(500).send({ success: false, message: "Error deleting the notifications" })
     }
 }
+
+
+exports.getAllDoctors = async (req, res) => {
+    try {
+        const doctors = await Doctor.find({ status: "approved" });
+        res.status(200).send({ success: true, message: "Successfuly fetched all doctors", data: doctors })
+
+    } catch (err) {
+        res.status(500).send({ success: false, message: "Error fetching doctors" })
+    }
+}

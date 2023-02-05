@@ -1,11 +1,13 @@
 import { Button, Col, Form, Input, Row, TimePicker } from "antd"
-import moment from 'moment'
+// import moment from 'moment' 
+import dayjs from 'dayjs'
+import { getTimeing } from '../Pages/ApplyDoctor';
 
 function DoctorForm({ onFinish, initialValue }) {
     const myInitialValue = initialValue !== undefined ? {
         ...initialValue, timeings: [
-            moment(initialValue.timeings[0], "HH:mm"),
-            moment(initialValue.timeings[1], "HH:mm"),
+            dayjs(initialValue.timeings[0], 'HH:mm'),
+            dayjs(initialValue.timeings[1], 'HH:mm'),
         ]
     } : null
     console.log(initialValue);

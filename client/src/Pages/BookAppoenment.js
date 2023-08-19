@@ -7,6 +7,7 @@ import { hideLoading, showLoading } from "../Redux/slice/alertsSlice"
 import moment from "moment"
 import { Button, Col, DatePicker, Row, TimePicker } from "antd"
 import toast from "react-hot-toast"
+import proxyApi from "../proxy"
 
 function BookAppoenment() {
     const [isAvalable, setIsAvalable] = useState(false)
@@ -20,7 +21,7 @@ function BookAppoenment() {
     async function getDoctorData() {
         try {
             dispatch(showLoading())
-            const res = await axios.post("/api/doctor/get-doctor-info-by-doctorId", { doctorId: params.doctorId }, {
+            const res = await proxyApi.post("/api/doctor/get-doctor-info-by-doctorId", { doctorId: params.doctorId }, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
@@ -44,7 +45,7 @@ function BookAppoenment() {
     const bookNow = async () => {
         try {
             dispatch(showLoading())
-            const res = await axios.post("/api/doctor/book-appoinment", { doctorId: params.doctorId, userId: user._id, date, selectedTimeing, doctorInfo: doctor, userInfo: user }, {
+            const res = await proxyApi.post("/api/doctor/book-appoinment", { doctorId: params.doctorId, userId: user._id, date, selectedTimeing, doctorInfo: doctor, userInfo: user }, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
@@ -66,7 +67,7 @@ function BookAppoenment() {
     const checkAvailiblityNow = async () => {
         try {
             dispatch(showLoading())
-            const res = await axios.post("/api/doctor/book-appoinment", { doctorId: params.doctorId, userId: user._id, date, selectedTimeing }, {
+            const res = await proxyApi.post("/api/doctor/book-appoinment", { doctorId: params.doctorId, userId: user._id, date, selectedTimeing }, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }

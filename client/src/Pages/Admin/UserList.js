@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { hideLoading, showLoading } from "../../Redux/slice/alertsSlice";
 import axios from 'axios'
 import { Table } from 'antd';
+import proxyApi from '../../proxy';
 
 function UserList() {
     const [users, setUsers] = useState([])
@@ -11,7 +12,7 @@ function UserList() {
     const getUserData = async () => {
         try {
             dispatch(showLoading())
-            const res = await axios.get("/api/admin/get-all-users", {
+            const res = await proxyApi.get("/api/admin/get-all-users", {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }

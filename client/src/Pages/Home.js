@@ -5,6 +5,7 @@ import { Col, Row } from 'antd'
 import Doctor from '../Components/Doctor'
 import { hideLoading, showLoading } from '../Redux/slice/alertsSlice'
 import { useDispatch } from 'react-redux';
+import proxyApi from '../proxy'
 
 function Home() {
     const [doctor, setDoctor] = useState([])
@@ -16,7 +17,7 @@ function Home() {
                 dispatch(showLoading())
 
                 // axios.post(url, payload, headers)
-                const res = await axios.get("/api/user/get-all-approved-doctors", {
+                const res = await proxyApi.get("/api/user/get-all-approved-doctors", {
                     headers: {
                         Authorization: 'Bearer ' + localStorage.getItem('token')
                     }

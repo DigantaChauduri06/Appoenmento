@@ -4,6 +4,7 @@ import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { hideLoading, showLoading } from '../Redux/slice/alertsSlice';
+import proxyApi from '../proxy';
 
 function Login() {
     const navigate = useNavigate()
@@ -12,7 +13,7 @@ function Login() {
         dispatch(showLoading())
         try {
             values.email = values.email?.toLowerCase()
-            const res = await axios.post("/api/user/login", values)
+            const res = await proxyApi.post("/api/user/login", values)
             dispatch(hideLoading())
             if (res.data.success) {
                 toast.success(res.data.message)

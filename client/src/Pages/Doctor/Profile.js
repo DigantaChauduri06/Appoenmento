@@ -7,6 +7,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useEffect, useState } from 'react';
 import { getTimeing } from '../ApplyDoctor';
+import proxyApi from '../../proxy';
 
 function Profile() {
     const [doctor, setDoctor] = useState(null)
@@ -18,7 +19,7 @@ function Profile() {
     async function getDoctorData() {
         try {
             dispatch(showLoading())
-            const res = await axios.post("/api/doctor/get-doctor-info-by-id", { userId: params.doctorId }, {
+            const res = await proxyApi.post("/api/doctor/get-doctor-info-by-id", { userId: params.doctorId }, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
@@ -46,7 +47,7 @@ function Profile() {
         try {
             dispatch(showLoading())
             values.email = values.email?.toLowerCase()
-            const res = await axios.post("/api/doctor/update-doctor-info-by-id", {
+            const res = await proxyApi.post("/api/doctor/update-doctor-info-by-id", {
                 ...values, userId: user._id,
                 timeings: [
                     getTimeing(values.timeings[0]),

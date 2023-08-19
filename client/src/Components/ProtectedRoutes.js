@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios'
 import { setUser } from '../Redux/slice/userSlice';
 import { hideLoading, showLoading } from '../Redux/slice/alertsSlice'
+import proxyApi from '../proxy';
 
 
 function ProtectedRoutes({ children }) {
@@ -13,7 +14,7 @@ function ProtectedRoutes({ children }) {
     async function getUser() {
         try {
             dispatch(showLoading())
-            const res = await axios.post("/api/user/get-user-info-by-id", { token: localStorage.getItem("item") }, {
+            const res = await proxyApi.post("/api/user/get-user-info-by-id", { token: localStorage.getItem("item") }, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }

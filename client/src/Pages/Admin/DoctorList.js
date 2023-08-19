@@ -5,6 +5,7 @@ import { hideLoading, showLoading } from "../../Redux/slice/alertsSlice";
 import axios from 'axios'
 import { Table } from 'antd';
 import { toast } from 'react-hot-toast';
+import proxyApi from '../../proxy';
 
 function DoctorList() {
     const [doctors, setDoctors] = useState([])
@@ -29,7 +30,7 @@ function DoctorList() {
     const changeDoctorStatus = async (record, status) => {
         try {
             dispatch(showLoading())
-            const res = await axios.post("/api/admin/change-doctor-status", { doctorId: record._id, userId: record.userId, status }, {
+            const res = await proxyApi.post("/api/admin/change-doctor-status", { doctorId: record._id, userId: record.userId, status }, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }

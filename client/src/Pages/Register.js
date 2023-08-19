@@ -4,6 +4,7 @@ import toast from 'react-hot-toast'
 import axios from 'axios'
 import { hideLoading, showLoading } from '../Redux/slice/alertsSlice'
 import { useDispatch } from 'react-redux';
+import proxyApi from '../proxy'
 
 function Register() {
     const dispatch = useDispatch()
@@ -13,7 +14,7 @@ function Register() {
         try {
             dispatch(showLoading())
             values.email = values.email?.toLowerCase()
-            const res = await axios.post("/api/user/register", values)
+            const res = await proxyApi.post("/api/user/register", values)
             dispatch(hideLoading())
 
             if (res.data.success) {

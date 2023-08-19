@@ -7,6 +7,7 @@ import { hideLoading, showLoading } from '../Redux/slice/alertsSlice';
 import { toast } from 'react-hot-toast';
 import { setUser } from '../Redux/slice/userSlice';
 import { useEffect } from 'react';
+import proxyApi from '../proxy';
 
 
 function Notification() {
@@ -17,7 +18,7 @@ function Notification() {
     const markAllSeen = async () => {
         try {
             dispatch(showLoading())
-            const res = await axios.post("/api/user/mark-all-notification-seen", { userId: user._id }, {
+            const res = await proxyApi.post("/api/user/mark-all-notification-seen", { userId: user._id }, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
@@ -41,7 +42,7 @@ function Notification() {
     const deleteAllSeen = async () => {
         try {
             dispatch(showLoading())
-            const res = await axios.post("/api/user/delete-all-notification-seen", { userId: user._id }, {
+            const res = await proxyApi.post("/api/user/delete-all-notification-seen", { userId: user._id }, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }

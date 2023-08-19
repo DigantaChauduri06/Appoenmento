@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import toast from "react-hot-toast";
 import DoctorForm from '../Components/DoctorForm';
 import dayjs from "dayjs";
+import proxyApi from "../proxy";
 
 export function getTimeing(time) {
     time = time.toString()
@@ -26,7 +27,7 @@ function ApplyDoctor() {
         try {
             dispatch(showLoading())
             values.email = values.email?.toLowerCase()
-            const res = await axios.post("/api/user/apply-doctor", {
+            const res = await proxyApi.post("/api/user/apply-doctor", {
                 ...values, userId: user._id,
                 timeings: [
                     getTimeing(values.timeings[0].$d),
